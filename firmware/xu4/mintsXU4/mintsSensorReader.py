@@ -70,14 +70,14 @@ def sensorFinisherIP(dateTime,sensorName,sensorDictionary):
 
 
 def sensorSend(sensorID,sensorData,dateTime):
-    if(sensorID=="ozoneMonitor"):
+    if(sensorID=="2B-O3"):
         ozoneMonitorWrite(sensorData,dateTime)
 
 
-
+# 2B Technologies Ozone Monitor
 def ozoneMonitorWrite(sensorData, dateTime):
     dataOut = sensorData.split(',')
-    sensorName = "ozoneMonitor"
+    sensorName = "2B-O3"
     dataLength = 5 # the ozone monitor outputs additional date and time making total length 6
     if(len(dataOut) == (dataLength + 1)):
         sensorDictionary =  OrderedDict([

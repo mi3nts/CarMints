@@ -30,7 +30,6 @@ def findOzonePort():
 #       Linux users can see attached usb devices using the lsusb command in the terminal
 def findRS232Devices():
     ports = list(serial.tools.list_ports.comports())
-    print(ports)
     devices = [] # list to hold all ports using RS232-USB Converter
     for p in ports:
         currentPort = str(p[2]) # get the USB VID
@@ -70,10 +69,14 @@ rs232_devices         = findRS232Devices()
 
 
 if __name__ == "__main__":
+    # the following code is for debugging
+    # to make sure everything is working run python3 mintsDefinitions.py 
+
     print("dataFolder: {0}".format(dataFolder))
     print("ozonePort: {0}".format(ozonePort))
     print("latestOff: {0}".format(latestOff))
     print("gpsPort: {0}".format(gpsPort))
+    #-------------------------------------------#
     print("RS232 Devices:")
     for dev in rs232_devices:
         print("\t{0}".format(dev))
