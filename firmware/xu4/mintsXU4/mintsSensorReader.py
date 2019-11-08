@@ -72,6 +72,12 @@ def sensorFinisherIP(dateTime,sensorName,sensorDictionary):
 def sensorSend(sensorID,sensorData,dateTime):
     if(sensorID=="2B-O3"):
         ozoneMonitorWrite(sensorData,dateTime)
+    if(sensorID=="2B-NOX"):
+        noxMonitorWrite(sensorData, dateTime)
+    if(sensorID=="2B-BC"):
+        blackCarbonMonitorWrite(sensorData, dateTime)
+
+
 
 
 # 2B Technologies Ozone Monitor
@@ -89,6 +95,56 @@ def ozoneMonitorWrite(sensorData, dateTime):
             	("sensorTime"     ,(str(dataOut[4])+','+str(dataOut[5]).replace('\r', '')) ),
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+def noxMonitorWrite(sensorData, dateTime):
+    dataOut = sensorData.split(',')
+    sensorName = "2B-NOX"
+    dataLength = 13  # total length is 14 but data and time are separate outputs
+    if(len(dataOut) == (dataLength + 1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     , str(dateTime)),
+        		("NO2"  ,dataOut[0]),
+        		("NO"  ,dataOut[1]),
+        		("NOX"  ,dataOut[2]),
+        		("temperature"  ,dataOut[3]),
+        		("pressure"  ,dataOut[4]),
+        		("flow"  ,dataOut[5]),
+        		("O3-flow"  ,dataOut[6]),
+        		("voltage"  ,dataOut[7]),
+        		("O3-voltage"  ,dataOut[8]),
+        		("scrubber-temperature"  ,dataOut[9]),
+        		("error-byte"  ,dataOut[10]),
+        		("sensorTime"  ,dataOut[11]),
+        		("status"  ,dataOut[13].replace('\r', '')),
+            	("sensorTime"     ,(str(dataOut[11])+','+str(dataOut[12])) ),
+                ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+ 
+def blackCarbonMonitorWrite(sensorData, dateTime):
+    dataOut = sensorData.split(',')
+    sensorName = "2B-BC"
+    dataLength = 15  # total length is 17 but data and time are separate outputs and the first entry is just hte log number
+    if(len(dataOut) == (dataLength + 2)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     , str(dateTime)),
+        		("Extinction-880nm"  ,dataOut[1]),
+        		("Extinction-405nm"  ,dataOut[2]),
+        		("BC"  ,dataOut[3]),
+        		("PM"  ,dataOut[4]),
+        		("temperature"  ,dataOut[5]),
+        		("pressure"  ,dataOut[6]),
+        		("humidity"  ,dataOut[7]),
+        		("flow-temperature"  ,dataOut[8]),
+        		("voltage-880nm"  ,dataOut[9]),
+        		("voltage-405nm"  ,dataOut[10]),
+        		("current-405nm"  ,dataOut[13]),
+        		("current-405nm"  ,dataOut[14]),
+        		("status"  ,dataOut[15].replace('\r', '')),
+            	("sensorTime"     ,(str(dataOut[11])+','+str(dataOut[12])) ),
+                ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+ 
+
 
 
 
