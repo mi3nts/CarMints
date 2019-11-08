@@ -59,4 +59,8 @@ def formatForDeviceType(dataString):
 
 
 if __name__ == "__main__":
-    readPort(devices[0])
+    import sys
+    portNum = int(sys.argv[1])
+    print("Num of rs232 device: {0}".format(len(devices)))
+    print("monitoring device on port: {0}".format(devices[portNum]))
+    readPort(devices[portNum])
