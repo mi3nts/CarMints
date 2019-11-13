@@ -17,10 +17,9 @@ def findOzonePort():
         print(currentPort)
         if(currentPort.find("PID=067B")>=0): # check the USB VID to make sure it's the ozone sensor
             print("Found")
-            return True,p[0]; # if it's there, return true and the port location ex: /dev/ttyUSB0
+            return True,p[0] # if it's there, return true and the port location ex: /dev/ttyUSB0
 
     return False, "xxx";
-
 
 
 
@@ -38,7 +37,13 @@ def findRS232Devices():
     return devices
 
 
-
+def findLicorCO2H20Port():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        currentPort = str(p[2]) # check for unique USB VID
+        if(currentPort.find("PID=0a07")):
+            print("Found")
+            return True, p[0]
 
 
 def findMacAddress():
@@ -67,6 +72,7 @@ gpsPort               = findPort("GPS/GNSS Receiver")
 
 rs232_devices         = findRS232Devices()
 
+licorPort             = findLicorCO2H20Port()
 
 if __name__ == "__main__":
     # the following code is for debugging
@@ -81,7 +87,7 @@ if __name__ == "__main__":
     for dev in rs232_devices:
         print("\t{0}".format(dev))
 
-
+    print("Licor Port: {0}".format(licorPort))
 
 
 
