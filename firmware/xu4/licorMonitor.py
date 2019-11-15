@@ -28,6 +28,9 @@ def main():
                 if(chr(c)=='\n'):
                     dataString     = (''.join(line))
                     print(dataString)
+                    dt = datetime.datetime.now()
+#                    mSR.dataSplit(dataString, dt)
+                    line = []
 
 if __name__ == "__main__":
     main()

@@ -22,6 +22,10 @@ Therefore, we can see that the data format in space separated will be
 
 celltemp, cellpres, co2, co2abs, h20, h2oabs, h2odewpoint, ivolt, co2_raw, co2ref_raw, h2o_raw, h2oref_raw, flowrate
 
+Below is a sample output from the serial line
+
+5.14171e1 1.00432e2 4.61955e2 7.6744260e-2 1.2145249e1 1.56520e1 9.1817741e-2 1.36867e1 1912281 3696537 2308038 33091380
+
 
 Send the following xml code to the device to turn off the xml tags:
 
