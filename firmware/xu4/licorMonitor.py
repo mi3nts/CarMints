@@ -27,9 +27,12 @@ def main():
                 line.append(chr(c))
                 if(chr(c)=='\n'):
                     dataString     = (''.join(line))
-                    print(dataString)
+                    # get rid of end line and carriage return characters if they exist
+                    dataString = dataString.replace('\n', '')
+                    dataString = dataString.replace('\r', '')
+                    dataString = "~#mints0!LICOR>" + dataString
                     dt = datetime.datetime.now()
-#                    mSR.dataSplit(dataString, dt)
+                    mSR.dataSplit(dataString, dt)
                     line = []
 
 if __name__ == "__main__":

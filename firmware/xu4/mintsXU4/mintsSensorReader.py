@@ -76,6 +76,8 @@ def sensorSend(sensorID,sensorData,dateTime):
         noxMonitorWrite(sensorData, dateTime)
     if(sensorID=="2B-BC"):
         blackCarbonMonitorWrite(sensorData, dateTime)
+    if(sensorID=="LICOR"):
+        licorMonitorWrite(sensorData, dateTime)
 
 
 
@@ -143,8 +145,30 @@ def blackCarbonMonitorWrite(sensorData, dateTime):
             	("sensorTime"     ,(str(dataOut[11])+','+str(dataOut[12])) ),
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
- 
 
+
+def licorMonitorWrite(sensorData, dateTime):
+    dataOut = sensorData.split(' ') # space separated, NOT comma separated
+    sensorName = "LICOR"
+    sensorDictionary = OrderedDict([
+        ("dateTime", str(dateTime)),
+        ("cellTemp", dataOut[0]),
+        ("cellPressure", dataOut[1]),
+        ("CO2", dataOut[2]),
+        ("CO2_abs", dataOut[3]),
+        ("H2O", dataOut[4]),
+        ("H2O_abs", dataOut[5]),
+        ("H2O_dewpoint", dataOut[6]),
+        ("ivolt", dataOut[7]),
+        ("CO2_raw", dataOut[8]),
+        ("CO2_raw_ref", dataOut[9]),
+        ("H2O_raw", dataOut[10]),
+        ("H2O_raw_ref", dataOut[11]),
+    ])
+    if len(dataOut) == 13:
+        sensorDictionary["flowrate"] = dataOut[12]
+
+    sensorFinisher(dateTime, sensorName, sensorDictionary)
 
 
 
