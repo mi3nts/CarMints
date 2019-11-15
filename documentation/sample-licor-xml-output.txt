@@ -1,0 +1,43 @@
+<li850>
+  <data>
+    <celltemp>5.14171e1</celltemp>
+    <cellpres>1.00436e2</cellpres>
+    <co2>4.60977e2</co2>
+    <co2abs>7.6625943e-2</co2abs>
+    <h2o>1.52081e1</h2o>
+    <h2oabs>9.0004329e-2</h2oabs>
+    <h2odewpoint>1.32458e1</h2odewpoint>
+    <ivolt>1.2150285e1</ivolt>
+    <raw>
+      <co2>1913027</co2>
+      <co2ref>3696584</co2ref>
+      <h2o>2312622</h2o>
+      <h2oref>3309479</h2oref>
+    </raw>
+    <flowrate>0</flowrate>
+  </data>
+</li850>
+
+Therefore, we can see that the data format in space separated will be
+
+celltemp, cellpres, co2, co2abs, h20, h2oabs, h2odewpoint, ivolt, co2_raw, co2ref_raw, h2o_raw, h2oref_raw, flowrate
+
+
+Send the following xml code to the device to turn off the xml tags:
+
+<li850>
+  <rs232>
+    <strip>true</strip>
+  </rs232>
+</li850>
+
+
+Send this xml code to the device to turn the xml tags back on:
+
+<li850>
+  <rs232>
+    <strip>false</strip>
+  </rs232>
+</li850>
+
+
