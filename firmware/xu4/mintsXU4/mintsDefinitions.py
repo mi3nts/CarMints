@@ -32,7 +32,8 @@ def findRS232Devices():
     devices = [] # list to hold all ports using RS232-USB Converter
     for p in ports:
         currentPort = str(p[2]) # get the USB VID
-        if(currentPort.find("PID=067b")):
+        print(currentPort)
+        if("067B" in currentPort):
             devices.append(p[0])
     return devices
 
@@ -41,7 +42,7 @@ def findLicorCO2H20Port():
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
         currentPort = str(p[2]) # check for unique USB VID
-        if(currentPort.find("PID=0a07")):
+        if("PID=0159" in currentPort):
             print("Found")
             return True, p[0]
 
