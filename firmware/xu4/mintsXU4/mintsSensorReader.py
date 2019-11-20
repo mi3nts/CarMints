@@ -2,7 +2,6 @@ import serial
 import datetime
 import os
 import csv
-import deepdish as dd
 from mintsXU4 import mintsDefinitions as mD
 from getmac import get_mac_address
 import time
