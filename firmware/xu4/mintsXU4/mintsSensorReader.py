@@ -8,7 +8,6 @@ import time
 import serial
 import pynmea2
 from collections import OrderedDict
-import netifaces as ni
 import math
 
 dataFolder    = mD.dataFolder
