@@ -43,7 +43,7 @@ def findLicorCO2H20Port():
     for p in ports:
         currentPort = str(p[2]) # check for unique USB VID
         if("PID=0159" in currentPort):
-            print("Found")
+            print("Found licor port")
             return True, p[0]
 
 
