@@ -29,14 +29,14 @@ def readPort(port):
                 dataString = ''.join(line)
                 dataString = dataString.replace('\n', '')
                 # make the dataString take the proper mints format
-                dataString = formatForDeviceType(dataString)
+                dataString = formatForDeviceType(dataString, ser)
                 print(dataString)
                 dt = datetime.datetime.now()
                 mSR.dataSplit(dataString, dt)
                 line = []
 
 
-def formatForDeviceType(dataString):
+def formatForDeviceType(dataString, ser):
     data = dataString.split(',')
     if (len(data) == 6):
         # ozone monitor
@@ -52,6 +52,7 @@ def formatForDeviceType(dataString):
 
     else:
         print("Device not recognized!")
+        ser.write("<li850><rs232><strip>true</strip></rs232></li850>")
         return dataString
 
     dataString = "~#mints0!" + dataString
