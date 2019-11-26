@@ -52,7 +52,7 @@ def formatForDeviceType(dataString, ser):
 
     else:
         print("Device not recognized!")
-        ser.write("<li850><rs232><strip>true</strip></rs232></li850>")
+        ser.write("<li850><rs232><strip>true</strip></rs232></li850>").encode()
         return dataString
 
     dataString = "~#mints0!" + dataString
