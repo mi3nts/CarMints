@@ -32,7 +32,6 @@ def findRS232Devices():
     devices = [] # list to hold all ports using RS232-USB Converter
     for p in ports:
         currentPort = str(p[2]) # get the USB VID
-        print(currentPort)
         if("067B" in currentPort):
             devices.append(p[0])
     return devices
@@ -65,7 +64,6 @@ def findMacAddress():
 
 
 dataFolder            = "/home/teamlary/mintsData/raw"
-ozonePort             = findOzonePort()
 macAddress            = findMacAddress()
 
 latestOff             = True
@@ -80,7 +78,6 @@ if __name__ == "__main__":
     # to make sure everything is working run python3 mintsDefinitions.py 
 
     print("dataFolder: {0}".format(dataFolder))
-    print("ozonePort: {0}".format(ozonePort))
     print("latestOff: {0}".format(latestOff))
     print("gpsPort: {0}".format(gpsPort))
     #-------------------------------------------#
