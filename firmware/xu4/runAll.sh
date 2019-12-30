@@ -5,7 +5,7 @@
 #
 #
 sleep 120
-if -z ps aux | grep 'rs232monitor.py 0'
+if pgrep -f 'python3 rs232monitor.py 0' > /dev/null
 then
     exit
 else
@@ -13,7 +13,7 @@ else
     sleep 5
 fi
 
-if -z ps aux | grep 'rs232monitor.py 1'
+if pgrep -f 'python3 rs232monitor.py 1' > /dev/null
 then
     exit
 else
@@ -21,7 +21,7 @@ else
     sleep 5
 fi
 
-if -z ps aux | grep 'rs232monitor.py 2'
+if pgrep -f 'python3 rs232monitor.py 2' > /dev/null
 then
     exit
 else
@@ -29,7 +29,7 @@ else
     sleep 5
 fi
 
-if -z ps aux | grep 'licorMonitor.py'
+if pgrep -f 'python3 licorMonitor.py' > /dev/null
 then
     exit
 else
@@ -37,7 +37,7 @@ else
     sleep 5
 fi
 
-if -z ps aux | grep 'GPSReader.py'
+if pgrep -f 'python3 GPSReader.py' > /dev/null
 then
     exit
 else
