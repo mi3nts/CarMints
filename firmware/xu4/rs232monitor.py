@@ -23,18 +23,21 @@ def readPort(port):
 
     line = [] # used to store a line of data
     while True: # continuously check for data
-        for c in ser.read():
-            line.append(chr(c)) # add character to line
-            if chr(c) == '\n': # line ends at newline character
-                dataString = ''.join(line)
-                dataString = dataString.replace('\n', '')
-                # make the dataString take the proper mints format
-                dataString = formatForDeviceType(dataString, ser)
-                print(dataString)
-                dt = datetime.datetime.now()
-                mSR.dataSplit(dataString, dt)
-                line = []
-
+        try:
+            for c in ser.read():
+                line.append(chr(c)) # add character to line
+                if chr(c) == '\n': # line ends at newline character
+                    dataString = ''.join(line)
+                    dataString = dataString.replace('\n', '')
+                    # make the dataString take the proper mints format
+                    dataString = formatForDeviceType(dataString, ser)
+                    print(dataString)
+                    dt = datetime.datetime.now()
+                    mSR.dataSplit(dataString, dt)
+                    line = []
+        except:
+            print("Incomplete read. Something may be wrong with {0}".format(port))
+            line = []
 
 def formatForDeviceType(dataString, ser):
     data = dataString.split(',')

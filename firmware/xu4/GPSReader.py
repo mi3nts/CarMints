@@ -53,7 +53,7 @@ def main():
                     line = []
                     break
         except:
-            # print("Incomplete String Read")  
+            print("Incomplete String Read")
             line = []
 
     ser.close()

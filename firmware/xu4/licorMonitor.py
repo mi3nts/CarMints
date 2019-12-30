@@ -24,18 +24,21 @@ def main():
         # time.sleep(10)
         line = []
         while True:
-            for c in ser.read():
-                line.append(chr(c))
-                if(chr(c)=='\n'):
-                    dataString     = (''.join(line))
-                    # get rid of end line and carriage return characters if they exist
-                    dataString = dataString.replace('\n', '')
-                    dataString = dataString.replace('\r', '')
-                    dataString = "~#mints0!LICOR>" + dataString
-                    dt = datetime.datetime.now()
-                    mSR.dataSplit(dataString, dt)
-                    line = []
-
+            try:
+                for c in ser.read():
+                    line.append(chr(c))
+                    if(chr(c)=='\n'):
+                        dataString     = (''.join(line))
+                        # get rid of end line and carriage return characters if they exist
+                        dataString = dataString.replace('\n', '')
+                        dataString = dataString.replace('\r', '')
+                        dataString = "~#mints0!LICOR>" + dataString
+                        dt = datetime.datetime.now()
+                        mSR.dataSplit(dataString, dt)
+                        line = []
+            except:
+                print("Incomplete string read. Something may be wrong with the Licor sensor")
+                line = []
 if __name__ == "__main__":
     main()
 
