@@ -158,10 +158,10 @@ def licorMonitorWrite(sensorData, dateTime):
         ("H2O_abs", dataOut[5]),
         ("H2O_dewpoint", dataOut[6]),
         ("ivolt", dataOut[7]),
-        ("CO2_raw", dataOut[8]),
-        ("CO2_raw_ref", dataOut[9]),
-        ("H2O_raw", dataOut[10]),
-        ("H2O_raw_ref", dataOut[11]),
+        ("CO2", dataOut[8]),
+        ("CO2_ref", dataOut[9]),
+        ("H2O", dataOut[10]),
+        ("H2O_ref", dataOut[11]),
     ])
     if len(dataOut) == 13:
         sensorDictionary["flowrate"] = dataOut[12]

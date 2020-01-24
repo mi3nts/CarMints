@@ -63,7 +63,7 @@ def findMacAddress():
 
 
 
-dataFolder            = "/home/teamlary/mintsData/raw"
+dataFolder            = "/home/teamlary/mintsData/reference"
 macAddress            = findMacAddress()
 
 latestOff             = True
