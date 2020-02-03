@@ -178,7 +178,7 @@ def getDeltaTime(beginTime,deltaWanted):
 
 
 def getLatitudeCords(latitudeStr,latitudeDirection):
-    print(latitudeStr)
+#    print(latitudeStr)
     latitude = float(latitudeStr)
     latitudeCord      =  math.floor(latitude/100) +(latitude - 100*(math.floor(latitude/100)))/60
     if(latitudeDirection=="S"):
@@ -215,6 +215,38 @@ def GPSGPGGAWrite(dataString,dateTime):
                 ("age"               ,sensorData.age_gps_data),
                 ("stationID"         ,sensorData.ref_station_id)
         	     ])
+
+        #Getting Write Path
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+
+
+def GPSGPGGA1Write(dataString,dateTime):
+    dataStringPost = dataString.replace('\n', '')
+    sensorData = pynmea2.parse(dataStringPost)
+    latitudeCordinate = getLatitudeCords(sensorData.lat,sensorData.lat_dir)
+
+    if(sensorData.gps_qual>0):
+        sensorName = "GPSGPGGA1"
+        sensorDictionary = OrderedDict([
+                ("dateTime"          ,str(dateTime)),
+                ("timestamp"         ,sensorData.timestamp),
+                ("latitudeCoordinate" ,getLatitudeCords(sensorData.lat,sensorData.lat_dir)),
+                ("longitudeCoordinate",getLongitudeCords(sensorData.lon,sensorData.lon_dir)),
+                ("latitude"          ,sensorData.lat),
+                ("latitudeDirection" ,sensorData.lat_dir),
+                ("longitude"         ,sensorData.lon),
+                ("longitudeDirection",sensorData.lon_dir),
+                ("gpsQuality"        ,sensorData.gps_qual),
+                ("numberOfSatellites",sensorData.num_sats),
+                ("HorizontalDilution",sensorData.horizontal_dil),
+                ("altitude"          ,sensorData.altitude),
+                ("altitudeUnits"     ,sensorData.altitude_units),
+                ("undulation"        ,sensorData.geo_sep),
+                ("undulationUnits"   ,sensorData.geo_sep_units),
+                ("age"               ,sensorData.age_gps_data),
+                ("stationID"         ,sensorData.ref_station_id)
+                 ])
 
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
@@ -267,12 +299,37 @@ def GPSGPRMCWrite(dataString,dateTime):
                 ("speedOverGround"      ,sensorData.spd_over_grnd),
                 ("trueCourse"           ,sensorData.true_course),
                 ("dateStamp"            ,sensorData.datestamp),
-                ("magVariation"         ,sensorData.mag_variation),
                 ("magVariationDirection",sensorData.mag_var_dir)
                  ])
 
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+def GPSGPRMC1Write(dataString,dateTime):
+
+    dataStringPost = dataString.replace('\n', '')
+    sensorData = pynmea2.parse(dataStringPost)
+    if(sensorData.status=='A'):
+        sensorName = "GPSGPRMC1"
+        sensorDictionary = OrderedDict([
+                ("dateTime"             ,str(dateTime)),
+                ("timestamp"            ,sensorData.timestamp),
+                ("status"               ,sensorData.status),
+                ("latitudeCoordinate"    ,getLatitudeCords(sensorData.lat,sensorData.lat_dir)),
+                ("longitudeCoordinate"   ,getLongitudeCords(sensorData.lon,sensorData.lon_dir)),
+                ("latitude"             ,sensorData.lat),
+                ("latitudeDirection"    ,sensorData.lat_dir),
+                ("longitude"            ,sensorData.lon),
+                ("longitudeDirection"   ,sensorData.lon_dir),
+                ("speedOverGround"      ,sensorData.spd_over_grnd),
+                ("trueCourse"           ,sensorData.true_course),
+                ("dateStamp"            ,sensorData.datestamp),
+                ("magVariationDirection",sensorData.mag_var_dir)
+                 ])
+
+        #Getting Write Path
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
 
 def GPSGPRMC2Write(dataString,dateTime):
 
@@ -293,20 +350,28 @@ def GPSGPRMC2Write(dataString,dateTime):
                 ("speedOverGround"      ,sensorData.spd_over_grnd),
                 ("trueCourse"           ,sensorData.true_course),
                 ("dateStamp"            ,sensorData.datestamp),
-                ("magVariation"         ,sensorData.mag_variation),
                 ("magVariationDirection",sensorData.mag_var_dir)
                  ])
 
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
+# Reading Raw GPS Data 
+def GPSRawWrite(dataString,dateTime):
 
-#-----------------GPS CODE-------------------------------------
+    dataStringPost = dataString.replace('\r\n', '')
+    if(True):
+        sensorName = "GPSRaw"
+        sensorDictionary = OrderedDict([
+                ("dateTime"             ,str(dateTime)),
+                ("rawString"            ,dataStringPost)
+                 ])
+
+        #Getting Write Path
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 
-
-
-
+#-----------------GPS CODE---------------------------------
 
 
 def writeCSV2(writePath,sensorDictionary,exists):

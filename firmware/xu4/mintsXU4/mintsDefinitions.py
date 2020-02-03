@@ -1,6 +1,17 @@
 from getmac import get_mac_address
 import serial.tools.list_ports
 
+# Adding Multiple GPS Devices 
+def findGPSPorts():
+    ports = list(serial.tools.list_ports.comports())
+    outPorts = []
+    for p in ports:
+        currentPort = str(p)
+        if(currentPort.endswith("GPS/GNSS Receiver")):
+            outPorts.append(currentPort.split(" ")[0])
+
+    return outPorts
+
 def findPort(find):
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
@@ -68,6 +79,8 @@ macAddress            = findMacAddress()
 
 latestOff             = True
 gpsPort               = findPort("GPS/GNSS Receiver")
+gpsPorts              = findGPSPorts()
+
 
 rs232_devices         = findRS232Devices()
 
@@ -86,6 +99,10 @@ if __name__ == "__main__":
         print("\t{0}".format(dev))
 
     print("Licor Port: {0}".format(licorPort))
+
+    print("GPS  Devices:")
+    for dev in gpsPorts:
+        print("\t{0}".format(dev))
 
 
 
