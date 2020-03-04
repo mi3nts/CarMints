@@ -251,7 +251,6 @@ def GPSGPGGA1Write(dataString,dateTime):
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
-
 def GPSGPGGA2Write(dataString,dateTime):
     dataStringPost = dataString.replace('\n', '')
     sensorData = pynmea2.parse(dataStringPost)
@@ -282,13 +281,13 @@ def GPSGPGGA2Write(dataString,dateTime):
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
-def GPSGPGGA3Write(dataString,dateTime):
+def GPSGPGGA2Write(dataString,dateTime):
     dataStringPost = dataString.replace('\n', '')
     sensorData = pynmea2.parse(dataStringPost)
     latitudeCordinate = getLatitudeCords(sensorData.lat,sensorData.lat_dir)
 
     if(sensorData.gps_qual>0):
-        sensorName = "GPSGPGGA3"
+        sensorName = "GPSGPGGA2"
         sensorDictionary = OrderedDict([
                 ("dateTime"          ,str(dateTime)),
                 ("timestamp"         ,sensorData.timestamp),
@@ -363,6 +362,31 @@ def GPSGPRMC1Write(dataString,dateTime):
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 
+def GPSGPRMCuBloxWrite(dataString,dateTime):
+
+    dataStringPost = dataString.replace('\n', '')
+    sensorData = pynmea2.parse(dataStringPost)
+    if(sensorData.status=='A'):
+        sensorName = "GPSGPRMC3"
+        sensorDictionary = OrderedDict([
+                ("dateTime"             ,str(dateTime)),
+                ("timestamp"            ,sensorData.timestamp),
+                ("status"               ,sensorData.status),
+                ("latitudeCoordinate"    ,getLatitudeCords(sensorData.lat,sensorData.lat_dir)),
+                ("longitudeCoordinate"   ,getLongitudeCords(sensorData.lon,sensorData.lon_dir)),
+                ("latitude"             ,sensorData.lat),
+                ("latitudeDirection"    ,sensorData.lat_dir),
+                ("longitude"            ,sensorData.lon),
+                ("longitudeDirection"   ,sensorData.lon_dir),
+                ("speedOverGround"      ,sensorData.spd_over_grnd),
+                ("trueCourse"           ,sensorData.true_course),
+                ("dateStamp"            ,sensorData.datestamp),
+                ("magVariationDirection",sensorData.mag_var_dir)
+                 ])
+
+        #Getting Write Path
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
 def GPSGPRMC2Write(dataString,dateTime):
 
     dataStringPost = dataString.replace('\n', '')
@@ -388,31 +412,6 @@ def GPSGPRMC2Write(dataString,dateTime):
         #Getting Write Path
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
-
-def GPSGPRMC3Write(dataString,dateTime):
-
-    dataStringPost = dataString.replace('\n', '')
-    sensorData = pynmea2.parse(dataStringPost)
-    if(sensorData.status=='A'):
-        sensorName = "GPSGPRMC3"
-        sensorDictionary = OrderedDict([
-                ("dateTime"             ,str(dateTime)),
-                ("timestamp"            ,sensorData.timestamp),
-                ("status"               ,sensorData.status),
-                ("latitudeCoordinate"    ,getLatitudeCords(sensorData.lat,sensorData.lat_dir)),
-                ("longitudeCoordinate"   ,getLongitudeCords(sensorData.lon,sensorData.lon_dir)),
-                ("latitude"             ,sensorData.lat),
-                ("latitudeDirection"    ,sensorData.lat_dir),
-                ("longitude"            ,sensorData.lon),
-                ("longitudeDirection"   ,sensorData.lon_dir),
-                ("speedOverGround"      ,sensorData.spd_over_grnd),
-                ("trueCourse"           ,sensorData.true_course),
-                ("dateStamp"            ,sensorData.datestamp),
-                ("magVariationDirection",sensorData.mag_var_dir)
-                 ])
-
-        #Getting Write Path
-        sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 # Reading Raw GPS Data 
 def GPSRawWrite(dataString,dateTime):

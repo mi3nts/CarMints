@@ -12,6 +12,17 @@ def findGPSPorts():
 
     return outPorts
 
+def findUbloxGPSPorts():
+    ports = list(serial.tools.list_ports.comports())
+    outPorts = []
+    for p in ports:
+        currentPort = str(p)
+        print(currentPort)
+        if(currentPort.endswith("u-blox 6  -  GPS Receiver")):
+            outPorts.append(currentPort.split(" ")[0])
+
+    return outPorts
+
 def findPort(find):
     ports = list(serial.tools.list_ports.comports())
     for p in ports:
@@ -80,8 +91,7 @@ macAddress            = findMacAddress()
 latestOff             = True
 gpsPort               = findPort("GPS/GNSS Receiver")
 gpsPorts              = findGPSPorts()
-
-
+uBloxGPSPort          = findUbloxGPSPorts()
 rs232_devices         = findRS232Devices()
 
 licorPort             = findLicorCO2H20Port()
@@ -104,6 +114,9 @@ if __name__ == "__main__":
     for dev in gpsPorts:
         print("\t{0}".format(dev))
 
+    print("U Blox GPS Devices:")
+    for dev in uBloxGPSPort:
+        print("\t{0}".format(dev))
 
 
 

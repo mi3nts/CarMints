@@ -59,6 +59,15 @@ else
 fi
 
 
+if pgrep -f 'python3 GPSReaderUblox.py 0' > /dev/null
+then
+    exit
+else
+    python3 GPSReaderUblox.py 0 &
+    sleep 5
+fi
+
+
 if pgrep -f 'python3 licorMonitor.py' > /dev/null
 then
     exit
