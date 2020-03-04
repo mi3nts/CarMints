@@ -1,3 +1,6 @@
+
+# Cron Job 
+```
 # Car Mints 
 # Edit this file to introduce tasks to be run by cron.
 #
@@ -24,7 +27,8 @@
 
 
 @reboot cd /home/teamlary/gitHubRepos/john/CarMints/firmware/xu4 && ./runAll.sh
-*/1 * * * * sshpass -p Fypvaj-3rondu-juxmad rsync -avzrtu /home/teamlary/mintsData/reference  mintsdata@10.0.4.105:/volume1/MINTSNASCAR/
+*/1 * * * * sshpass -p xxx rsync -avzrtu /home/teamlary/mintsData/reference  mintsdata@10.0.4.105:/volume1/MINTSNASCAR/
 */3 * * * * cd /home/teamlary/mintsData/reference && rm *
 */10 * * * * cd /home/teamlary/gitHubRepos/john/CarMints/firmware/xu4 && ./runAll.sh
 
+```
