@@ -34,7 +34,6 @@ def main():
                         dataString = dataString.replace('\r', '')
                         dataString = "~#mints0!LICOR>" + dataString
                         dt = datetime.datetime.now()
-                        print(dataString)
                         mSR.dataSplit(dataString, dt)
                         line = []
             except:
