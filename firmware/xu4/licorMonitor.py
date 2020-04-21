@@ -21,7 +21,7 @@ def main():
 
         print("Connection successful!")
         ser.write("<li850><rs232><strip>true</strip></rs232></li850>".encode('utf-8'))
-        time.sleep(30)
+        time.sleep(5)
         line = []
         while True:
             try:
@@ -34,6 +34,7 @@ def main():
                         dataString = dataString.replace('\r', '')
                         dataString = "~#mints0!LICOR>" + dataString
                         dt = datetime.datetime.now()
+                        print(dataString)
                         mSR.dataSplit(dataString, dt)
                         line = []
             except:
