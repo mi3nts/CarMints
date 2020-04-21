@@ -20,8 +20,8 @@ def main():
             timeout = 0)
 
         print("Connection successful!")
-        # ser.write("<li850><rs232><strip>true</strip></rs232></li850>".encode('utf-8'))
-        # time.sleep(10)
+        ser.write("<li850><rs232><strip>true</strip></rs232></li850>".encode('utf-8'))
+        time.sleep(30)
         line = []
         while True:
             try:
