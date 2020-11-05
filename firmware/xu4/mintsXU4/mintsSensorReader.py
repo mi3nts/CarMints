@@ -32,10 +32,6 @@ def sensorSplit(dataQuota,dateTime):
         sensorSend(sensorID,sensorData,dateTime)
 
 
-
-
-
-
 def sensorFinisher(dateTime,sensorName,sensorDictionary):
     #Getting Write Path
     writePath = getWritePath(sensorName,dateTime)
@@ -95,6 +91,38 @@ def ozoneMonitorWrite(sensorData, dateTime):
             	("sensorTime"     ,(str(dataOut[4])+','+str(dataOut[5]).replace('\r', '')) ),
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+# 2B Technologies Ozone Monitor
+def partectorWrite(sensorData, dateTime):
+    dataOut = sensorData.split('\t')
+    sensorName = "NP2"
+    dataLength = 17 # the ozone monitor outputs additional date and time making total length 6
+    if(len(dataOut) == (dataLength + 1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     , str(dateTime)),
+                ("p1"  ,   dataOut[0]), #
+                ("p2"     ,dataOut[1]),
+                ("p3"     ,dataOut[2]),
+                ("p4"     ,dataOut[3]),
+                ("p5"     ,dataOut[4]),
+                ("p6"     ,dataOut[5]),
+                ("p7"     ,dataOut[6]),
+                ("p8"     ,dataOut[7]),
+                ("p9"     ,dataOut[8]),
+                ("p10"    ,dataOut[9]),
+                ("p11"     ,dataOut[10]),
+                ("p12"     ,dataOut[11]),
+                ("p13"  ,   dataOut[12]),
+                ("p14"     ,dataOut[13]),
+                ("p15"     ,dataOut[14]),
+                ("p16"     ,dataOut[15]),
+                ("p17"  ,   dataOut[16]),
+                ("p18"     ,dataOut[17]),
+               ])
+    print(sensorDictionary)
+    sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+
 
 def noxMonitorWrite(sensorData, dateTime):
     dataOut = sensorData.split(',')

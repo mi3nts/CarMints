@@ -43,8 +43,6 @@ def findOzonePort():
 
     return False, "xxx";
 
-
-
 # NOTE: this is my hokey fix to deal with devices that need to use RS232 - USB Converters since
 #       they all have the same UBS VID
 #
@@ -65,6 +63,15 @@ def findLicorCO2H20Port():
         currentPort = str(p[2]) # check for unique USB VID
         if("PID=0159" in currentPort):
             print("Found licor port")
+            return True, p[0]
+
+
+def findPartectorPort():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        currentPort = str(p[1]) # check for unique USB VID
+        if("LDSAmeter" in currentPort):
+            print("Found Partector port")
             return True, p[0]
 
 
@@ -95,6 +102,9 @@ uBloxGPSPort          = findUbloxGPSPorts()
 rs232_devices         = findRS232Devices()
 
 licorPort             = findLicorCO2H20Port()
+partectorPort         = findPartectorPort()
+
+
 
 if __name__ == "__main__":
     # the following code is for debugging
@@ -109,7 +119,7 @@ if __name__ == "__main__":
         print("\t{0}".format(dev))
 
     print("Licor Port: {0}".format(licorPort))
-
+    print("Partector Port: {0}".format(partectorPort))
     print("GPS  Devices:")
     for dev in gpsPorts:
         print("\t{0}".format(dev))

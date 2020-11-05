@@ -3,7 +3,7 @@ from datetime import datetime
 from shutil import rmtree
 
 
-path_to_data = '/home/teamlary/mintsData/reference/001e0610c2e7'
+path_to_data = '/home/teamlary/mintsData/reference/001e0610c2e7/'
 
 current_date = str(datetime.date(datetime.now())).split('-')
 year = current_date[0]

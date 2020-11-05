@@ -76,6 +76,15 @@ else
     sleep 5
 fi
 
+if pgrep -f 'python3 partectorReader.py' > /dev/null
+then
+    exit
+else
+    python3 partectorReader.py &
+    sleep 5
+fi
+
+
 
 # Old Version
 # python3 rs232monitor.py 0 &
